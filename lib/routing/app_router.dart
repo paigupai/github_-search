@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/features/search/presentation/search_page.dart';
+import 'package:github_search/features/search_details/presentation/search_details_page.dart';
+import 'package:github_search/features/settings/presentation/settings_page.dart';
 import 'package:github_search/routing/scaffold_with_nested_navigation.dart';
-import 'package:github_search/ui/search/presentation/search_page.dart';
-import 'package:github_search/ui/search_details/presentation/search_details_page.dart';
-import 'package:github_search/ui/settings/presentation/settings_page.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoute {
@@ -12,11 +12,11 @@ enum AppRoute {
   settings,
 }
 
-// private navigators
+// navigators
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _searchNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'search');
 final _favoritesNavigatorKey =
-    GlobalKey<NavigatorState>(debugLabel: 'favorites');
+    GlobalKey<NavigatorState>(debugLabel: 'settings');
 
 final goRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -24,8 +24,6 @@ final goRouterProvider = Provider<GoRouter>((ref) {
     navigatorKey: _rootNavigatorKey,
     debugLogDiagnostics: true,
     routes: [
-      // Stateful navigation based on:
-      // https://github.com/flutter/packages/blob/main/packages/go_router/example/lib/stateful_shell_route.dart
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return ScaffoldWithNestedNavigation(navigationShell: navigationShell);
