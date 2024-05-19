@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search/features/search/data/repo_repository.dart';
 import 'package:github_search/features/search/domain/repo_query_data.dart';
@@ -15,6 +16,7 @@ class SearchPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = L10n.of(context)!;
     // 検索クエリーを取得
     final query = ref.watch(searchQueryNotifierProvider);
 
@@ -26,7 +28,7 @@ class SearchPage extends ConsumerWidget {
         appBar: AppBar(
           title: Center(
               child: Text(
-            'リポジトリ検索',
+            l10n.search_title,
             style: Theme.of(context).textTheme.titleMedium,
           )),
         ),
@@ -45,7 +47,7 @@ class SearchPage extends ConsumerWidget {
           body: Builder(builder: (context) {
             // 検索ワードが空の場合
             if (query.isEmpty) {
-              return emptyView(context);
+              return emptyView(context, l10n);
             }
             // 検索結果を取得
             final responseAsync = ref.watch(
@@ -61,7 +63,7 @@ class SearchPage extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      '検索結果: $totalResults 件',
+                      l10n.search_results(totalResults),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
@@ -70,7 +72,7 @@ class SearchPage extends ConsumerWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'エラーが発生しました error: ${responseAsync.error.toString()}',
+                      '${l10n.error_message} error: ${responseAsync.error.toString()}',
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
@@ -118,8 +120,8 @@ class SearchPage extends ConsumerWidget {
                           return Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Center(
-                              child:
-                                  Text('エラーが発生しました error: ${error.toString()}'),
+                              child: Text(
+                                  '${l10n.error_message} error: ${error.toString()}'),
                             ),
                           );
                         });
@@ -142,10 +144,10 @@ class SearchPage extends ConsumerWidget {
   }
 
   // 検索ワードが空の場合
-  Widget emptyView(BuildContext context) {
+  Widget emptyView(BuildContext context, L10n l10n) {
     return Center(
       child:
-          Text('検索ワードを入力してください', style: Theme.of(context).textTheme.bodyMedium),
+          Text(l10n.empty_query, style: Theme.of(context).textTheme.bodyMedium),
     );
   }
 }

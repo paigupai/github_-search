@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:github_search/features/search/presentation/search/search_query_notifier.dart';
 
@@ -21,6 +22,7 @@ class _RepoSearchBarState extends ConsumerState<RepoSearchBar> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = L10n.of(context)!;
     return Container(
       height: 80,
       padding: const EdgeInsets.all(8),
@@ -38,7 +40,7 @@ class _RepoSearchBarState extends ConsumerState<RepoSearchBar> {
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          labelText: 'リポジトリ検索',
+          labelText: l10n.repo_search,
         ),
         onEditingComplete: () {
           FocusManager.instance.primaryFocus?.unfocus();

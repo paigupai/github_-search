@@ -1,0 +1,10 @@
+{
+  "@@locale":"en",
+  "search": "Search",
+  "settings": "Settings",
+  "search_title":"Search",
+  "repo_search": "Search for a repository",
+  "empty_query": "Please enter a search query",
+  "error_message": "An error occurred while fetching the data",
+  "search_results": "Search results: {count} items"
+}
