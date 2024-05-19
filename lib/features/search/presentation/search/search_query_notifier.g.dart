@@ -7,11 +7,9 @@ part of 'search_query_notifier.dart';
 // **************************************************************************
 
 String _$searchQueryNotifierHash() =>
-    r'51ad83155d8ea67a432334549568e8e0cce7c3c7';
+    r'28d91549e273aa87077eca125fa5fd76a8912af6';
 
-///
 /// 検索クエリーnotifier
-///
 ///
 /// Copied from [SearchQueryNotifier].
 @ProviderFor(SearchQueryNotifier)

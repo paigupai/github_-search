@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:github_search/features/search/presentation/search_page.dart';
-import 'package:github_search/features/search_details/presentation/search_details_page.dart';
+import 'package:github_search/features/search/presentation/repo_details/repo_details_page.dart';
+import 'package:github_search/features/search/presentation/search/search_page.dart';
 import 'package:github_search/features/settings/presentation/settings_page.dart';
 import 'package:github_search/routing/scaffold_with_nested_navigation.dart';
 import 'package:go_router/go_router.dart';
@@ -47,7 +47,7 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                     pageBuilder: (context, state) {
                       return MaterialPage(
                         key: state.pageKey,
-                        child: const SearchDetailsPage(),
+                        child: const RepoDetailsPage(),
                       );
                     },
                   )

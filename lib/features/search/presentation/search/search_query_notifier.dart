@@ -4,9 +4,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'search_query_notifier.g.dart';
 
-///
 /// 検索クエリーnotifier
-///
 @riverpod
 class SearchQueryNotifier extends _$SearchQueryNotifier {
   Timer? _debounceTimer;
@@ -21,7 +19,7 @@ class SearchQueryNotifier extends _$SearchQueryNotifier {
     if (_debounceTimer != null) {
       _debounceTimer!.cancel();
     }
-    _debounceTimer = Timer(const Duration(milliseconds: 500), () {
+    _debounceTimer = Timer(const Duration(seconds: 1), () {
       state = query;
     });
   }
