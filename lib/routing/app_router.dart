@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/features/search/domain/search_repos_response.dart';
 import 'package:github_search/features/search/presentation/repo_details/repo_details_page.dart';
 import 'package:github_search/features/search/presentation/search/search_page.dart';
 import 'package:github_search/features/settings/presentation/settings_page.dart';
@@ -42,12 +43,13 @@ final goRouterProvider = Provider<GoRouter>((ref) {
                 ),
                 routes: [
                   GoRoute(
-                    path: ':id',
+                    path: 'repo_details',
                     name: AppRoute.searchDetails.name,
                     pageBuilder: (context, state) {
+                      final repo = state.extra as Repo;
                       return MaterialPage(
                         key: state.pageKey,
-                        child: const RepoDetailsPage(),
+                        child: RepoDetailsPage(repo: repo),
                       );
                     },
                   )

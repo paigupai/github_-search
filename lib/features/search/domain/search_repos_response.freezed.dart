@@ -192,6 +192,8 @@ mixin _$Repo {
   @JsonKey(name: 'full_name')
   String get fullName => throw _privateConstructorUsedError;
   Owner get owner => throw _privateConstructorUsedError;
+  @JsonKey(name: 'html_url')
+  String get htmlUrl => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   @JsonKey(name: 'stargazers_count')
   int get stargazersCount => throw _privateConstructorUsedError;
@@ -224,6 +226,7 @@ abstract class $RepoCopyWith<$Res> {
       {String name,
       @JsonKey(name: 'full_name') String fullName,
       Owner owner,
+      @JsonKey(name: 'html_url') String htmlUrl,
       String? description,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
       @JsonKey(name: 'watchers_count') int watchersCount,
@@ -256,6 +259,7 @@ class _$RepoCopyWithImpl<$Res, $Val extends Repo>
     Object? name = null,
     Object? fullName = null,
     Object? owner = null,
+    Object? htmlUrl = null,
     Object? description = freezed,
     Object? stargazersCount = null,
     Object? watchersCount = null,
@@ -282,6 +286,10 @@ class _$RepoCopyWithImpl<$Res, $Val extends Repo>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as Owner,
+      htmlUrl: null == htmlUrl
+          ? _value.htmlUrl
+          : htmlUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -353,6 +361,7 @@ abstract class _$$RepoImplCopyWith<$Res> implements $RepoCopyWith<$Res> {
       {String name,
       @JsonKey(name: 'full_name') String fullName,
       Owner owner,
+      @JsonKey(name: 'html_url') String htmlUrl,
       String? description,
       @JsonKey(name: 'stargazers_count') int stargazersCount,
       @JsonKey(name: 'watchers_count') int watchersCount,
@@ -383,6 +392,7 @@ class __$$RepoImplCopyWithImpl<$Res>
     Object? name = null,
     Object? fullName = null,
     Object? owner = null,
+    Object? htmlUrl = null,
     Object? description = freezed,
     Object? stargazersCount = null,
     Object? watchersCount = null,
@@ -409,6 +419,10 @@ class __$$RepoImplCopyWithImpl<$Res>
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
               as Owner,
+      htmlUrl: null == htmlUrl
+          ? _value.htmlUrl
+          : htmlUrl // ignore: cast_nullable_to_non_nullable
+              as String,
       description: freezed == description
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
@@ -468,6 +482,7 @@ class _$RepoImpl implements _Repo {
       {required this.name,
       @JsonKey(name: 'full_name') required this.fullName,
       required this.owner,
+      @JsonKey(name: 'html_url') required this.htmlUrl,
       required this.description,
       @JsonKey(name: 'stargazers_count') required this.stargazersCount,
       @JsonKey(name: 'watchers_count') required this.watchersCount,
@@ -491,6 +506,9 @@ class _$RepoImpl implements _Repo {
   final String fullName;
   @override
   final Owner owner;
+  @override
+  @JsonKey(name: 'html_url')
+  final String htmlUrl;
   @override
   final String? description;
   @override
@@ -523,7 +541,7 @@ class _$RepoImpl implements _Repo {
 
   @override
   String toString() {
-    return 'Repo(name: $name, fullName: $fullName, owner: $owner, description: $description, stargazersCount: $stargazersCount, watchersCount: $watchersCount, language: $language, forksCount: $forksCount, openIssuesCount: $openIssuesCount, defaultBranch: $defaultBranch, repoUrl: $repoUrl, stargazersUrl: $stargazersUrl, watchersUrl: $watchersUrl, forksUrl: $forksUrl, issuesUrl: $issuesUrl)';
+    return 'Repo(name: $name, fullName: $fullName, owner: $owner, htmlUrl: $htmlUrl, description: $description, stargazersCount: $stargazersCount, watchersCount: $watchersCount, language: $language, forksCount: $forksCount, openIssuesCount: $openIssuesCount, defaultBranch: $defaultBranch, repoUrl: $repoUrl, stargazersUrl: $stargazersUrl, watchersUrl: $watchersUrl, forksUrl: $forksUrl, issuesUrl: $issuesUrl)';
   }
 
   @override
@@ -535,6 +553,7 @@ class _$RepoImpl implements _Repo {
             (identical(other.fullName, fullName) ||
                 other.fullName == fullName) &&
             (identical(other.owner, owner) || other.owner == owner) &&
+            (identical(other.htmlUrl, htmlUrl) || other.htmlUrl == htmlUrl) &&
             (identical(other.description, description) ||
                 other.description == description) &&
             (identical(other.stargazersCount, stargazersCount) ||
@@ -567,6 +586,7 @@ class _$RepoImpl implements _Repo {
       name,
       fullName,
       owner,
+      htmlUrl,
       description,
       stargazersCount,
       watchersCount,
@@ -599,6 +619,7 @@ abstract class _Repo implements Repo {
       {required final String name,
       @JsonKey(name: 'full_name') required final String fullName,
       required final Owner owner,
+      @JsonKey(name: 'html_url') required final String htmlUrl,
       required final String? description,
       @JsonKey(name: 'stargazers_count') required final int stargazersCount,
       @JsonKey(name: 'watchers_count') required final int watchersCount,
@@ -621,6 +642,9 @@ abstract class _Repo implements Repo {
   String get fullName;
   @override
   Owner get owner;
+  @override
+  @JsonKey(name: 'html_url')
+  String get htmlUrl;
   @override
   String? get description;
   @override

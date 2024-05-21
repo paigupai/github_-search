@@ -54,89 +54,92 @@ class SearchPage extends ConsumerWidget {
               fetchRepoProvider(
                   queryData: RepoQueryData(query: query, page: 1)),
             );
-            final totalResults = responseAsync.valueOrNull?.totalCount ?? 0;
 
-            return Column(
-              children: [
-                // 検索結果がある場合
-                if (responseAsync.hasValue)
+            return responseAsync.when(data: (response) {
+              final totalCount = response.totalCount;
+              return Column(
+                children: [
+                  // 検索結果
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      l10n.search_results(totalResults),
+                      l10n.search_results(totalCount.toString()),
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
-                // errorの場合
-                if (responseAsync.hasError)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      '${l10n.error_message} error: ${responseAsync.error.toString()}',
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ),
-                Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: () async {
-                      logger.i('SearchPage onRefresh');
-                      ref.invalidate(fetchRepoProvider);
-                      try {
-                        await ref.read(
-                          fetchRepoProvider(
-                                  queryData:
-                                      RepoQueryData(query: query, page: 1))
-                              .future,
-                        );
-                      } catch (e) {
-                        logger.w('SearchPage onRefresh error: $e');
-                      }
-                    },
-                    child: ListView.separated(
-                      key: ValueKey(query),
-                      itemCount: totalResults,
-                      itemBuilder: (context, index) {
-                        final page = index ~/ pageSize + 1;
-                        final indexInPage = index % pageSize;
-                        final responseAsync = ref.watch(
-                          fetchRepoProvider(
-                              queryData:
-                                  RepoQueryData(query: query, page: page)),
-                        );
-                        return responseAsync.when(data: (response) {
-                          return Padding(
+                  Expanded(
+                    child: RefreshIndicator(
+                      onRefresh: () async {
+                        logger.i('SearchPage onRefresh');
+                        ref.invalidate(fetchRepoProvider);
+                        try {
+                          await ref.read(
+                            fetchRepoProvider(
+                                    queryData:
+                                        RepoQueryData(query: query, page: 1))
+                                .future,
+                          );
+                        } catch (e) {
+                          logger.w('SearchPage onRefresh error: $e');
+                        }
+                      },
+                      child: ListView.separated(
+                        key: ValueKey(query),
+                        itemCount: totalCount,
+                        itemBuilder: (context, index) {
+                          final page = index ~/ pageSize + 1;
+                          final indexInPage = index % pageSize;
+                          final responseAsync = ref.watch(
+                            fetchRepoProvider(
+                                queryData:
+                                    RepoQueryData(query: query, page: page)),
+                          );
+                          return responseAsync.when(data: (response) {
+                            return Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: RepoListTitle(
+                                  repo: response.items[indexInPage],
+                                ));
+                          }, loading: () {
+                            return const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Center(
+                                child: CircularProgressIndicator(),
+                              ),
+                            );
+                          }, error: (error, stackTrace) {
+                            return Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: RepoListTitle(
-                                repo: response.items[indexInPage],
-                              ));
-                        }, loading: () {
-                          return const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Center(
-                              child: CircularProgressIndicator(),
-                            ),
+                              child: Center(
+                                child: Text(
+                                  '${l10n.error_message} error: ${error.toString()}',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                              ),
+                            );
+                          });
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            indent: 16,
+                            endIndent: 16,
                           );
-                        }, error: (error, stackTrace) {
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(
-                              child: Text(
-                                  '${l10n.error_message} error: ${error.toString()}'),
-                            ),
-                          );
-                        });
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const Divider(
-                          indent: 16,
-                          endIndent: 16,
-                        );
-                      },
+                        },
+                      ),
                     ),
                   ),
-                ),
-              ],
-            );
+                ],
+              );
+            }, loading: () {
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            }, error: (error, stackTrace) {
+              return Center(
+                child: Text('${l10n.error_message} error: ${error.toString()}',
+                    style: Theme.of(context).textTheme.bodyMedium),
+              );
+            });
           }),
         ),
       ),
