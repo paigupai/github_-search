@@ -6,7 +6,7 @@ part of 'repo_repository.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$repoRepositoryHash() => r'93d1ae4a240e55e6d23a707673d1f0438390e194';
+String _$repoRepositoryHash() => r'8185b7bc83cc10a61e09110d93e6348cd6201869';
 
 /// See also [repoRepository].
 @ProviderFor(repoRepository)
@@ -21,7 +21,7 @@ final repoRepositoryProvider = AutoDisposeProvider<RepoRepository>.internal(
 );
 
 typedef RepoRepositoryRef = AutoDisposeProviderRef<RepoRepository>;
-String _$fetchRepoHash() => r'2ea5d507b583b2618d74a39f9fbc3ed6ad795c3c';
+String _$fetchRepoHash() => r'c2dc871dcc512a974206b1693378fc8bb53f0799';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -180,6 +180,148 @@ class _FetchRepoProviderElement
 
   @override
   RepoQueryData get queryData => (origin as FetchRepoProvider).queryData;
+}
+
+String _$fetchReadmeHash() => r'656948918099b8e7bd4f037a164b7d1abf01f23d';
+
+/// readme取得
+///
+/// Copied from [fetchReadme].
+@ProviderFor(fetchReadme)
+const fetchReadmeProvider = FetchReadmeFamily();
+
+/// readme取得
+///
+/// Copied from [fetchReadme].
+class FetchReadmeFamily extends Family<AsyncValue<FetchReadmeResponse>> {
+  /// readme取得
+  ///
+  /// Copied from [fetchReadme].
+  const FetchReadmeFamily();
+
+  /// readme取得
+  ///
+  /// Copied from [fetchReadme].
+  FetchReadmeProvider call({
+    required ReadmeQueryData queryData,
+  }) {
+    return FetchReadmeProvider(
+      queryData: queryData,
+    );
+  }
+
+  @override
+  FetchReadmeProvider getProviderOverride(
+    covariant FetchReadmeProvider provider,
+  ) {
+    return call(
+      queryData: provider.queryData,
+    );
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'fetchReadmeProvider';
+}
+
+/// readme取得
+///
+/// Copied from [fetchReadme].
+class FetchReadmeProvider
+    extends AutoDisposeFutureProvider<FetchReadmeResponse> {
+  /// readme取得
+  ///
+  /// Copied from [fetchReadme].
+  FetchReadmeProvider({
+    required ReadmeQueryData queryData,
+  }) : this._internal(
+          (ref) => fetchReadme(
+            ref as FetchReadmeRef,
+            queryData: queryData,
+          ),
+          from: fetchReadmeProvider,
+          name: r'fetchReadmeProvider',
+          debugGetCreateSourceHash:
+              const bool.fromEnvironment('dart.vm.product')
+                  ? null
+                  : _$fetchReadmeHash,
+          dependencies: FetchReadmeFamily._dependencies,
+          allTransitiveDependencies:
+              FetchReadmeFamily._allTransitiveDependencies,
+          queryData: queryData,
+        );
+
+  FetchReadmeProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.queryData,
+  }) : super.internal();
+
+  final ReadmeQueryData queryData;
+
+  @override
+  Override overrideWith(
+    FutureOr<FetchReadmeResponse> Function(FetchReadmeRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: FetchReadmeProvider._internal(
+        (ref) => create(ref as FetchReadmeRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        queryData: queryData,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeFutureProviderElement<FetchReadmeResponse> createElement() {
+    return _FetchReadmeProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is FetchReadmeProvider && other.queryData == queryData;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, queryData.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+mixin FetchReadmeRef on AutoDisposeFutureProviderRef<FetchReadmeResponse> {
+  /// The parameter `queryData` of this provider.
+  ReadmeQueryData get queryData;
+}
+
+class _FetchReadmeProviderElement
+    extends AutoDisposeFutureProviderElement<FetchReadmeResponse>
+    with FetchReadmeRef {
+  _FetchReadmeProviderElement(super.provider);
+
+  @override
+  ReadmeQueryData get queryData => (origin as FetchReadmeProvider).queryData;
 }
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
