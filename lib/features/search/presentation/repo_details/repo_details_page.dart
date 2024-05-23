@@ -22,7 +22,10 @@ class RepoDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(repo.name),
+        title: Text(
+          repo.name,
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -63,7 +66,9 @@ class RepoDetailsPage extends StatelessWidget {
             child: Text(repo.fullName,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    color: Colors.blue, decoration: TextDecoration.underline)),
+                    decorationColor: Colors.blue,
+                    color: Colors.blue,
+                    decoration: TextDecoration.underline)),
           ),
         ),
         Padding(

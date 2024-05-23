@@ -1,10 +1,15 @@
 {
   "@@locale":"ja",
   "search": "検索",
-  "settings": "設定",
+  "menu": "メニュー",
   "search_title":"GitHub リポジトリ検索",
   "repo_search": "リポジトリ検索",
   "empty_query": "検索ワードを入力してください",
   "error_message": "エラーが発生しました",
-  "search_results": "検索結果: {count} 件"
+  "search_results": "検索結果: {count} 件",
+  "menu_title": "メニュー",
+  "settings": "設定",
+  "language": "言語",
+  "theme": "テーマ",
+  "dark_mode": "ダークモード"
 }

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/features/menu/presentation/menu_page.dart';
 import 'package:github_search/features/search/domain/search_repos_response.dart';
 import 'package:github_search/features/search/presentation/repo_details/repo_details_page.dart';
 import 'package:github_search/features/search/presentation/search/search_page.dart';
-import 'package:github_search/features/settings/presentation/settings_page.dart';
 import 'package:github_search/routing/scaffold_with_nested_navigation.dart';
 import 'package:go_router/go_router.dart';
 
 enum AppRoute {
   search,
   searchDetails,
-  settings,
+  menu,
 }
 
 // navigators
@@ -62,11 +62,11 @@ final goRouterProvider = Provider<GoRouter>((ref) {
             routes: [
               // Shopping Cart
               GoRoute(
-                path: '/settings',
-                name: AppRoute.settings.name,
+                path: '/menu',
+                name: AppRoute.menu.name,
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
-                  child: const SettingsPage(),
+                  child: const MenuPage(),
                 ),
               ),
             ],
