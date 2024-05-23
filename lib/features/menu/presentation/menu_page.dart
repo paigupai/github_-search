@@ -2,6 +2,7 @@ import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:github_search/features/menu/presentation/component/animated_wave_background.dart';
 import 'package:github_search/features/menu/presentation/component/rounded_container.dart';
 import 'package:github_search/utils/flex_scheme_sate.dart';
 import 'package:github_search/utils/language_provider.dart';
@@ -21,11 +22,25 @@ class MenuPage extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      body: Column(
-        children: [
-          settingsView(l10n: l10n, context: context),
-        ],
-      ),
+      body: Consumer(builder: (context, ref, _) {
+        final themeMode = ref.watch(
+            flexSchemeNotifierProvider.select((value) => value.themeMode));
+        // ライトモードの場合のみ
+        if (themeMode == ThemeMode.light) {
+          return AnimatedWaveBackground(
+            child: Column(
+              children: [
+                settingsView(l10n: l10n, context: context),
+              ],
+            ),
+          );
+        }
+        return Column(
+          children: [
+            settingsView(l10n: l10n, context: context),
+          ],
+        );
+      }),
     );
   }
 
