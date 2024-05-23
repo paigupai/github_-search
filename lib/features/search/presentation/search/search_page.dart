@@ -119,9 +119,10 @@ class SearchPage extends ConsumerWidget {
                           });
                         },
                         separatorBuilder: (BuildContext context, int index) {
-                          return const Divider(
+                          return Divider(
                             indent: 16,
                             endIndent: 16,
+                            color: Theme.of(context).dividerColor,
                           );
                         },
                       ),
