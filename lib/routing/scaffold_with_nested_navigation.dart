@@ -20,8 +20,8 @@ class ScaffoldWithNestedNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // 横幅が450未満の場合はNavigationBarを表示
-    final size = MediaQuery.sizeOf(context);
-    if (size.width < 450) {
+    final width = MediaQuery.sizeOf(context).width;
+    if (width < 450) {
       return ScaffoldWithNavigationBar(
         body: navigationShell,
         currentIndex: navigationShell.currentIndex,
@@ -89,6 +89,8 @@ class ScaffoldWithNavigationRail extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = L10n.of(context)!;
     return Scaffold(
+      // キーボードが出た時に画面をリサイズしない
+      resizeToAvoidBottomInset: false,
       body: Row(
         children: [
           NavigationRail(
