@@ -26,11 +26,10 @@ class SearchPage extends ConsumerWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Center(
-              child: Text(
+          title: Text(
             l10n.search_title,
-            style: Theme.of(context).textTheme.titleMedium,
-          )),
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
         ),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
