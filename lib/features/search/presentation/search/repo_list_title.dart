@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:github_search/features/search/domain/search_repos_response.dart';
+import 'package:github_search/features/search/presentation/component/icon_text_view.dart';
 import 'package:go_router/go_router.dart';
 
 /// リポジトlistタイトル
@@ -41,46 +42,15 @@ class RepoListTitle extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Icon(
-                Icons.star,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              Text(
-                '${repo.stargazersCount}',
-                style: Theme.of(context).textTheme.bodyMedium,
+              IconTextView(
+                icon: Icons.star,
+                text: '${repo.stargazersCount}',
               ),
               const SizedBox(width: 8),
-              Icon(
-                Icons.code,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
+              IconTextView(
+                icon: Icons.code,
+                text: '${repo.language}',
               ),
-              Text(
-                '${repo.language}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(width: 8),
-              Icon(
-                Icons.remove_red_eye,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              Text(
-                '${repo.watchersCount}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(width: 8),
-              Icon(
-                Icons.call_split,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              Text(
-                '${repo.forksCount}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
-              const SizedBox(width: 8),
             ],
           ),
         ],
