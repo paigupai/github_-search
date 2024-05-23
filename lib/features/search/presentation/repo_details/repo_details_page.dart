@@ -4,10 +4,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:github_search/features/search/data/repo_repository.dart';
 import 'package:github_search/features/search/domain/readme_query_data.dart';
 import 'package:github_search/features/search/domain/search_repos_response.dart';
+import 'package:github_search/features/search/presentation/component/icon_text_view.dart';
+import 'package:github_search/features/search/presentation/component/svg_picture_network.dart';
 import 'package:github_search/utils/logger.dart';
 import 'package:markdown/markdown.dart' as md;
 import 'package:url_launcher/url_launcher.dart';
@@ -82,35 +83,14 @@ class RepoDetailsPage extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.star,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              Text(
-                '${repo.stargazersCount}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              IconTextView(icon: Icons.star, text: '${repo.stargazersCount}'),
               const SizedBox(width: 8),
-              Icon(
-                Icons.remove_red_eye,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              Text(
-                '${repo.watchersCount}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              IconTextView(
+                  icon: Icons.remove_red_eye, text: '${repo.watchersCount}'),
               const SizedBox(width: 8),
-              Icon(
-                Icons.code,
-                size: 16,
-                color: Theme.of(context).colorScheme.primary,
-              ),
-              Text(
-                '${repo.language}',
-                style: Theme.of(context).textTheme.bodyMedium,
-              ),
+              IconTextView(icon: Icons.call_split, text: '${repo.forksCount}'),
+              const SizedBox(width: 8),
+              IconTextView(icon: Icons.code, text: '${repo.language}'),
             ],
           ),
         ),
@@ -137,31 +117,55 @@ class RepoDetailsPage extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: MarkdownBody(
-            data: markdownData,
-            selectable: true,
-            onTapLink: (_, href, __) async {
-              logger.i('Tapped link: href = $href');
-              if (href != null) {
-                try {
-                  final url = Uri.parse(href);
-                  await launchUrl(url);
-                } catch (e) {
-                  logger.e('Failed to launch url: $e');
+              data: markdownData,
+              selectable: true,
+              onTapLink: (_, href, __) async {
+                logger.i('Tapped link: href = $href');
+                if (href != null) {
+                  try {
+                    final url = Uri.parse(href);
+                    await launchUrl(url);
+                  } catch (e) {
+                    logger.e('Failed to launch url: $e');
+                  }
                 }
-              }
-            },
-            extensionSet: md.ExtensionSet(
-              md.ExtensionSet.gitHubFlavored.blockSyntaxes,
-              [
-                md.EmojiSyntax(),
-                ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
-              ],
-            ),
-            imageBuilder: (uri, _, __) => CachedNetworkImage(
-              imageUrl: uri.toString(),
-              errorWidget: (_, url, dynamic __) => SvgPicture.network(url),
-            ),
-          ),
+              },
+              extensionSet: md.ExtensionSet(
+                md.ExtensionSet.gitHubFlavored.blockSyntaxes,
+                [
+                  md.EmojiSyntax(),
+                  ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
+                ],
+              ),
+              imageBuilder: (uri, _, __) {
+                return CachedNetworkImage(
+                    imageUrl: uri.toString(),
+                    placeholder: (_, __) => const CircularProgressIndicator(),
+                    errorWidget: (_, url, dynamic __) {
+                      // svgの場合はSvgPictureNetworkでロード
+                      if (url.contains('svg')) {
+                        return SvgPictureNetwork(
+                          url: url,
+                          placeholderBuilder: (_) =>
+                              const CircularProgressIndicator(),
+                          errorBuilder: (_) {
+                            logger.w('Failed to load image: url = $url');
+                            return const Icon(
+                              Icons.error,
+                              color: Colors.red,
+                              size: 24,
+                            );
+                          },
+                        );
+                      }
+                      logger.w('Failed to load image: url = $url');
+                      return const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                        size: 24,
+                      );
+                    });
+              }),
         );
       }, loading: () {
         return const Padding(
