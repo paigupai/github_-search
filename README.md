@@ -78,7 +78,7 @@ flutter pub run build_runner build -d
 
 # デプロイ
 [Web Deloy](https://paigupai.github.io/github_search/)  
-
+🚀GITHUB_TOKENは漏れるため、Web Deloyの場合はトークンが必要な検索機能は使用できません。
 ![](https://github.com/paigupai/github_search/blob/main/image/iShot.png)
 
 # 今後の改善予定
