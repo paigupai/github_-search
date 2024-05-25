@@ -1,0 +1,32 @@
+{
+    // IntelliSense を使用して関連する属性について学びましょう。 
+    // 既存の属性の説明を見るには、マウスをホバーしてください。
+    // 詳細はこちらをご覧ください: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "dev",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "debug",
+            "program": "lib/main.dart",
+            "args": [
+                "--debug",
+                "--dart-define-from-file",
+                "./dev.env"
+            ]
+        },
+        {
+            "name": "github_search (profile mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "github_search (release mode)",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+    ]
+}
