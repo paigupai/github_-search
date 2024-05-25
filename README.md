@@ -1,6 +1,6 @@
 # GitHub Search
 
-![gif](https://github.com/paigupai/github_search/blob/master/image/証跡.gif)  
+![gif](https://github.com/paigupai/github_search/blob/main/image/%E8%A8%BC%E8%B7%A1.gif)  
 
 # 環境
 ```
@@ -76,11 +76,12 @@ flutter pub run build_runner build -d
 └── utils                                 共通のユーティリティ
 ```
 
-# Deloy
-[Web Deloy](https://paigupai.github.io/github_search/)
-![image](https://github.com/paigupai/github_search/blob/master/image/iShot.png)
+# デプロイ
+[Web Deloy](https://paigupai.github.io/github_search/)  
 
-# 今後改善予定
+![](https://github.com/paigupai/github_search/blob/main/image/iShot.png)
+
+# 今後の改善予定
 
 - [ ] UI共通化
 - [ ] Integration テスト
