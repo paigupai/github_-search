@@ -2,13 +2,8 @@ name: Github Pages
 env:
   FLUTTER_VERSION: '3.19.6'
 on:
-  # test
-  pull_request:
-    types:
-      - opened
-      - synchronize
-#  push:
-#    branches: [ main ]
+  push:
+    branches: [ main ]
 
   workflow_dispatch:
 permissions:
@@ -38,4 +33,4 @@ jobs:
         uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /github_search/
-          customArgs: --dart-define="GITHUB_TOKEN=${{ secrets.GITHUB_TOKEN }}"
+          customArgs: --dart-define="GITHUB_TOKEN=${{ secrets.SEARCH_TOKEN }}"
