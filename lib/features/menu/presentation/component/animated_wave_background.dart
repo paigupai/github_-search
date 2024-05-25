@@ -2,8 +2,6 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:simple_animations/animation_builder/loop_animation_builder.dart';
-import 'package:simple_animations/animation_builder/mirror_animation_builder.dart';
-import 'package:simple_animations/movie_tween/movie_tween.dart';
 
 /// 波のアニメーションで背景を表現するウィジェット
 class AnimatedWaveBackground extends StatelessWidget {
@@ -15,7 +13,10 @@ class AnimatedWaveBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        const Positioned.fill(child: AnimatedBackground()),
+        Positioned.fill(
+            child: Container(
+          color: Theme.of(context).primaryColorLight,
+        )),
         onBottom(const AnimatedWave(
           height: 180,
           speed: 1.0,
@@ -41,45 +42,6 @@ class AnimatedWaveBackground extends StatelessWidget {
           child: child,
         ),
       );
-}
-
-enum _ColorTween { color1, color2 }
-
-class AnimatedBackground extends StatelessWidget {
-  const AnimatedBackground({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final tween = MovieTween()
-      ..tween(
-        _ColorTween.color1,
-        ColorTween(
-            begin: const Color(0xffD38312), end: Colors.lightBlue.shade900),
-        duration: const Duration(seconds: 3),
-      )
-      ..tween(
-        _ColorTween.color2,
-        ColorTween(begin: const Color(0xffA83279), end: Colors.blue.shade600),
-        duration: const Duration(seconds: 3),
-      );
-
-    return MirrorAnimationBuilder<Movie>(
-      tween: tween,
-      duration: tween.duration,
-      builder: (context, value, child) {
-        return Container(
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                value.get<Color>(_ColorTween.color1),
-                value.get<Color>(_ColorTween.color2)
-              ])),
-        );
-      },
-    );
-  }
 }
 
 class AnimatedWave extends StatelessWidget {
