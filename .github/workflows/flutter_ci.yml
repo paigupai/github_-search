@@ -1,6 +1,5 @@
 name: Flutter CI
 env:
-  TZ: "Asia/Tokyo"
   FLUTTER_VERSION: '3.19.6'
 on:
   # PRのオープンと同期時に実行
@@ -22,6 +21,7 @@ jobs:
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
           channel: 'stable'
+          cache: true
         # flutter check
       - name: Check flutter version
         run: flutter --version
