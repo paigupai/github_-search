@@ -76,11 +76,12 @@ flutter pub run build_runner build -d
 └── utils                                 共通のユーティリティ
 ```
 
-# Deloy
-[Web Deloy](https://paigupai.github.io/github_search/)
+# デプロイ
+[Web Deloy](https://paigupai.github.io/github_search/)  
+
 ![](https://github.com/paigupai/github_search/blob/main/image/iShot.png)
 
-# 今後改善予定
+# 今後の改善予定
 
 - [ ] UI共通化
 - [ ] Integration テスト
