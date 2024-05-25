@@ -18,7 +18,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
-      - name: Flutter
+      - name: Repository
+        id: version
+        run: |
+          REPOSITORY=$(echo ${{ github.repository }} | sed -e "s#.*/##")
+          echo ::set-output name=repository::$REPOSITORY
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{ env.FLUTTER_VERSION }}
@@ -30,9 +34,11 @@ jobs:
         # パッケージのインストール
       - name: Install packages
         run: flutter pub get
+      - name: Build Web
+        run: flutter build web --web-renderer html --base-href /${{ steps.version.outputs.repository }}/ --dart-define=GITHUB_TOKEN=${{ secrets.SEARCH_TOKEN }}
         # Deploy
       - name: Deploy
-        uses: bluefireteam/flutter-gh-pages@v7
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          baseHref: /gh-pages/
-          customArgs: --dart-define="GITHUB_TOKEN=${{ secrets.SEARCH_TOKEN }}"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/web
