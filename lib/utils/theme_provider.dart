@@ -24,6 +24,8 @@ class FlexSchemeNotifier extends _$FlexSchemeNotifier {
 
   // テーマ
   void setFlexScheme(FlexScheme flexScheme) {
+    // カスタムテーマの場合
+    // customLightTheme, customDarkThemeをセット
     if (flexScheme == FlexScheme.custom) {
       state = state.copyWith(
         flexScheme: flexScheme,

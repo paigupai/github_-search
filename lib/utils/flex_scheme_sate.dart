@@ -31,8 +31,6 @@ final customLightTheme = FlexThemeData.light(
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,
-  // To use the Playground font, add GoogleFonts package and uncomment
-  // fontFamily: GoogleFonts.notoSans().fontFamily,
 );
 
 final customDarkTheme = FlexThemeData.dark(
@@ -49,6 +47,4 @@ final customDarkTheme = FlexThemeData.dark(
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,
-  // To use the Playground font, add GoogleFonts package and uncomment
-  // fontFamily: GoogleFonts.notoSans().fontFamily,
 );

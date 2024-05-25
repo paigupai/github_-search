@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:github_search/utils/logger.dart';
 
+/// dio用LoggerInterceptor
 class LoggerInterceptor implements Interceptor {
   final stopwatches = <String, Stopwatch>{};
 
