@@ -33,4 +33,4 @@ jobs:
         uses: bluefireteam/flutter-gh-pages@v7
         with:
           baseHref: /github_search/
-          customArgs: --dart-define="GITHUB_TOKEN=${{ secrets.SEARCH_TOKEN }}" --dart-define="ENABLED_DEVICE_PREVIEW=true"
+          customArgs: --dart-define="GITHUB_TOKEN=token" --dart-define="ENABLED_DEVICE_PREVIEW=true"
