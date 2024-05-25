@@ -1,0 +1,39 @@
+name: Flutter CI
+env:
+  TZ: "Asia/Tokyo"
+  FLUTTER_VERSION: '3.19.6'
+on:
+  # PRのオープンと同期時に実行
+  pull_request:
+    types:
+      - opened
+      - synchronize
+  # push時に実行
+  push:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Flutter Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+        # flutter check
+      - name: Check flutter version
+        run: flutter --version
+        # パッケージのインストール
+      - name: Install packages
+        run: flutter pub get
+        # フォーマットのチェック
+      - name: Check format
+        run: dart format -o none --set-exit-if-changed $(find ./lib ./test -name "*.dart" -not \( -name "*.*freezed.dart" -o -name "*.*g.dart" \) )
+        # 静的解析
+      - name: Analyze
+        run: flutter analyze
+        # テストの実行
+      - name: Run tests
+        run: flutter test
