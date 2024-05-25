@@ -5,7 +5,7 @@ import 'package:simple_animations/animation_builder/loop_animation_builder.dart'
 import 'package:simple_animations/animation_builder/mirror_animation_builder.dart';
 import 'package:simple_animations/movie_tween/movie_tween.dart';
 
-/// アニメーション、波の背景
+/// 波のアニメーションで背景を表現するウィジェット
 class AnimatedWaveBackground extends StatelessWidget {
   const AnimatedWaveBackground({super.key, required this.child});
 
