@@ -59,6 +59,7 @@ dependencies:
   # animation
   simple_animations: ^5.0.2
   mockito: ^5.4.4
+  device_preview: ^1.1.0
 
 dev_dependencies:
   flutter_test:
